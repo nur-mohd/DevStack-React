@@ -3,6 +3,17 @@ import type { iTechnology } from "../types/TechnologyType";
 import TechnologyCard from "./TechnologyCard";
 import StackSidebar from "./StackSidebar";
 import { Bounce, toast } from "react-toastify";
+import { FaDocker, FaJava, FaJs, FaNodeJs, FaReact } from "react-icons/fa";
+import {
+  SiNextdotjs,
+  SiPostgresql,
+  SiRedis,
+  SiSvelte,
+  SiTailwindcss,
+  SiTypescript,
+  SiVuedotjs,
+} from "react-icons/si";
+import type { ReactNode } from "react";
 
 interface TechnologySectionProps {
   TechnologyPromise: Promise<iTechnology[]>;
@@ -11,6 +22,20 @@ interface TechnologySectionProps {
 const TechnologySection = ({ TechnologyPromise }: TechnologySectionProps) => {
   const technologys = use(TechnologyPromise);
   const [stack, setStack] = useState<iTechnology[]>([]);
+  const icons: Record<string, ReactNode> = {
+    react: <FaReact className="text-2xl text-cyan-500" />,
+    vue: <SiVuedotjs className="text-2xl text-green-500" />,
+    svelte: <SiSvelte className="text-2xl text-orange-500" />,
+    nextjs: <SiNextdotjs className="text-2xl text-black" />,
+    nodejs: <FaNodeJs className="text-2xl text-green-600" />,
+    postgresql: <SiPostgresql className="text-2xl text-blue-600" />,
+    redis: <SiRedis className="text-2xl text-red-500" />,
+    javascript: <FaJs className="text-2xl text-yellow-500" />,
+    typescript: <SiTypescript className="text-2xl text-blue-500" />,
+    java: <FaJava className="text-2xl text-red-600" />,
+    tailwindcss: <SiTailwindcss className="text-2xl text-cyan-400" />,
+    docker: <FaDocker className="text-2xl text-blue-500" />,
+  };
 
   const handleAddToStack = (technology: iTechnology) => {
     if (stack.some((item) => item.id === technology.id)) {
@@ -78,12 +103,14 @@ const TechnologySection = ({ TechnologyPromise }: TechnologySectionProps) => {
         </div>
         <TechnologyCard
           technologys={technologys}
+          icons={icons}
           stack={stack}
           onAddToStack={handleAddToStack}
         />
       </section>
       <StackSidebar
         stack={stack}
+        icons={icons}
         onRemoveFromStack={handleRemoveFromStack}
         onRemoveAll={handleRemoveAll}
       />

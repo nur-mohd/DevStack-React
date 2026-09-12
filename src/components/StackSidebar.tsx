@@ -1,13 +1,15 @@
 import { HiOutlineXMark } from "react-icons/hi2";
 import type { iTechnology } from "../types/TechnologyType";
+import type { ReactNode } from "react";
 
 interface StackSidebarProps {
   stack: iTechnology[];
+  icons: Record<string, ReactNode>;
   onRemoveFromStack: (technologyId: string) => void;
   onRemoveAll: () => void;
 }
 
-const StackSidebar = ({ stack, onRemoveFromStack, onRemoveAll }: StackSidebarProps) => {
+const StackSidebar = ({ stack, icons, onRemoveFromStack, onRemoveAll }: StackSidebarProps) => {
   return (
     <aside className="h-fit rounded-lg border border-gray-200 bg-base-100 p-5 shadow-sm lg:sticky lg:top-6">
       <h2 className="text-lg font-bold text-[#0f172a]">Your stack</h2>
@@ -29,7 +31,7 @@ const StackSidebar = ({ stack, onRemoveFromStack, onRemoveAll }: StackSidebarPro
                 className="flex items-center gap-3 rounded-md border border-gray-200 p-3"
                 key={technology.id}
               >
-                <img className="h-8 w-8 object-contain" src={technology.icon} alt="" />
+                {icons[technology.id]}
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold">{technology.name}</p>
                   <p className="text-xs text-gray-500">{technology.category}</p>

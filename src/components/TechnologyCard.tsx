@@ -1,22 +1,21 @@
 import type { iTechnology } from "../types/TechnologyType";
 import { HiStar } from "react-icons/hi2";
+import type { ReactNode } from "react";
 
 interface TechnologyCardProps {
   technologys: iTechnology[];
+  icons: Record<string, ReactNode>;
   stack: iTechnology[];
   onAddToStack: (technology: iTechnology) => void;
 }
 
-const TechnologyCard = ({ technologys, stack, onAddToStack }: TechnologyCardProps) => {
+const TechnologyCard = ({ technologys, icons, stack, onAddToStack }: TechnologyCardProps) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2">
-      {technologys.map((technology: iTechnology) => (
-        <div className="card bg-base-100 w-full shadow-md border border-gray-100" key={technology.id}>
-          <figure className="flex justify-between items-center px-10 pt-10">
-            <img
-              src={technology.icon}
-              alt={technology.name}
-            />
+    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+      {technologys.map((technology) => (
+        <div className="card w-full border border-gray-100 bg-base-100 shadow-md" key={technology.id}>
+          <figure className="flex items-center justify-between px-10 pt-10">
+            {icons[technology.id]}
             <span className="text-[#0891B2]">{technology.badge}</span>
           </figure>
           <div className="card-body">
@@ -55,7 +54,6 @@ const TechnologyCard = ({ technologys, stack, onAddToStack }: TechnologyCardProp
         </div>
       ))}
     </div>
-
   );
 };
 
