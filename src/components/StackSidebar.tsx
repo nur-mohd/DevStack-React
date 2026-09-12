@@ -11,11 +11,11 @@ const StackSidebar = ({ stack, onRemoveFromStack, onRemoveAll }: StackSidebarPro
   return (
     <aside className="h-fit rounded-lg border border-gray-200 bg-base-100 p-5 shadow-sm lg:sticky lg:top-6">
       <h2 className="text-lg font-bold text-[#0f172a]">Your stack</h2>
-      {stack.length > 0 && (
-        <p className="mt-1 text-xs text-gray-500">
-          {stack.length} {stack.length === 1 ? "technology" : "technologies"} selected
-        </p>
-      )}
+      <p className="mt-1 text-xs text-gray-400">
+        {stack.length === 0
+          ? "No technologies selected yet."
+          : `${stack.length} ${stack.length === 1 ? "technology" : "technologies"} selected`}
+      </p>
 
       {stack.length === 0 ? (
         <div className="mt-8 rounded-md border border-dashed border-gray-200 p-4 text-center">
@@ -45,7 +45,7 @@ const StackSidebar = ({ stack, onRemoveFromStack, onRemoveAll }: StackSidebarPro
               </div>
             ))}
           </div>
-          <button className="btn btn-outline mt-4 w-full" onClick={onRemoveAll}>
+          <button className="btn btn-outline mt-4 w-full text-[#D82C20]" onClick={onRemoveAll}>
             Remove All
           </button>
         </>
