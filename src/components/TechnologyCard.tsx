@@ -1,8 +1,13 @@
 import type { iTechnology } from "../types/TechnologyType";
 import { HiStar } from "react-icons/hi2";
 
-const TechnologyCard = ({ technologys }: { technologys: iTechnology[] }) => {
-  console.log(technologys, "Technolgys card from");
+interface TechnologyCardProps {
+  technologys: iTechnology[];
+  stack: iTechnology[];
+  onAddToStack: (technology: iTechnology) => void;
+}
+
+const TechnologyCard = ({ technologys, stack, onAddToStack }: TechnologyCardProps) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2">
       {technologys.map((technology: iTechnology) => (
@@ -28,7 +33,23 @@ const TechnologyCard = ({ technologys }: { technologys: iTechnology[] }) => {
             </div>
 
             <div className="card-actions justify-center">
-              <button className="btn btn-neutral px-2 py-2 w-full">Add to Stack</button>
+              {(() => {
+                const isAdded = stack.some((item) => item.id === technology.id);
+
+                return (
+                  <button
+                    className={`btn px-2 py-2 w-full disabled:cursor-not-allowed disabled:opacity-100 ${
+                      isAdded
+                        ? "bg-pink-50 text-pink-600"
+                        : "btn-neutral"
+                    }`}
+                    disabled={isAdded}
+                onClick={() => onAddToStack(technology)}
+                  >
+                    {isAdded ? "✓ Added to Stack" : "Add to Stack"}
+                  </button>
+                );
+              })()}
             </div>
           </div>
         </div>
