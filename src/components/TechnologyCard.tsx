@@ -17,7 +17,7 @@ const TechnologyCard = ({ technologys, stack, onAddToStack }: TechnologyCardProp
               src={technology.icon}
               alt={technology.name}
             />
-            <span>{technology.badge}</span>
+            <span className="text-[#0891B2]">{technology.badge}</span>
           </figure>
           <div className="card-body">
             <h2 className="card-title">{technology.name}</h2>
